@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Shopping List</title>
+  </head>
+  <body>
+
+    <div>
+      <a href="/newShoppingList">Add New Shopping List </a>
+    </div>
+
+    <h1>Shopping Lists</h1>
+
+    <div id='listContainer'>
+      <ul>
+        {{#shoppinglist}}
+
+          <li>
+            <div id='listName'>{{shoppinglistname}}</div>
+            <div id='listDeleteForm'>
+              <form action='/deleteShoppingList' method="POST">
+                <input type="hidden" name="shoppingListId" value='{{shoppinglistid}}'/>
+                <input type='submit' value="Delete"/>
+              </form>
+
+              <form action='/groceryList'>
+                <input type="hidden" name="showGroceryList" value='{{shoppinglistid}}'/>
+                <input type='submit' value="Show Grocery Items">
+            </div>
+          </li>
+
+
+        {{/shoppinglist}}
+      </ul>
+    </div>
+  </body>
+</html>

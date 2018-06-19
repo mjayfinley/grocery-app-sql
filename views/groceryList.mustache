@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>{{shoppinglistname}}</h2>
+
+    <h4>Add Item</h4>
+
+    <form action='/groceryList' method='POST'>
+      <input type="text" name="item" placeholder="item Name"/>
+      <input type="text" name="quantity" placeholder="quantity"/>
+      <input type="text" name="price" placeholder="price"/>
+      <input type="hidden" name="shoppingListId" value='{{shoppinglistid}}'>
+      <input type='submit'/>
+    </form>
+
+    <ul>
+    {{#groceryitem}}
+      <li>
+        ITEM: {{groceryitemname}}<br>
+        QUANTITY: {{quantity}}<br>
+        PRICE: ${{price}}<br>
+
+        <form action='/deleteGroceryItem' method="POST">
+          <input type="hidden" name="groceryItemId" value='{{groceryitemid}}'/>
+          <input type='submit' value="Delete"/>
+        </form>
+    </li>
+    {{/groceryitem}}
+    </ul>
+    
+    <a href="/shoppingList">Back to Shopping Lists</a>
+
+  </body>
+</html>
