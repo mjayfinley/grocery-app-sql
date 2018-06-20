@@ -21,6 +21,11 @@ app.use(express.static('public'))
 app.set('views','./views')
 app.set('view engine','mustache')
 
+app.get('/',function(req,res){
+
+  res.render('newShoppingList')
+})
+
 app.get('/newShoppingList',function(req,res){
 
   res.render('newShoppingList')
@@ -77,9 +82,10 @@ app.post('/groceryList', function(req,res){
 app.post('/deleteGroceryItem',function(req,res){
 
   let groceryItemId = req.body.groceryItemId
+  let shoppingListId = req.body.shoppingListId
 
   db.any('DELETE FROM groceryitem WHERE groceryitemid = $1',[groceryItemId]).then(function(){
-    res.redirect('/groceryList')
+    res.redirect('/groceryList/'+shoppingListId+'')
   })
 })
 
