@@ -16,22 +16,25 @@
       <input type="hidden" name="shoppingListId" value='{{shoppinglistid}}'>
       <input type='submit'/>
     </form>
+    <div>
+      <ul>
+        {{#groceryitem}}
+          <li>
+            <div>Item: {{groceryitemname}}</div>
+            <div>Quantity: {{quantity}}</div>
+            <div>Price: ${{price}}</div>
 
-    <ul>
-    {{#groceryitem}}
-      <li>
-        ITEM: {{groceryitemname}}<br>
-        QUANTITY: {{quantity}}<br>
-        PRICE: ${{price}}<br>
+            <form action='/deleteGroceryItem' method="POST">
+              <input type="hidden" name="shoppingListId" value='{{shoppinglistid}}'>
+              <input type="hidden" name="groceryItemId" value='{{groceryitemid}}'/>
+              <input type='submit' value="Delete"/>
+            </form>
+          </li>
 
-        <form action='/deleteGroceryItem' method="POST">
-          <input type="hidden" name="groceryItemId" value='{{groceryitemid}}'/>
-          <input type='submit' value="Delete"/>
-        </form>
-    </li>
-    {{/groceryitem}}
-    </ul>
-    
+
+        {{/groceryitem}}
+      </ul>
+    </div>
     <a href="/shoppingList">Back to Shopping Lists</a>
 
   </body>

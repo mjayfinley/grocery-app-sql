@@ -26,10 +26,6 @@ app.get('/newShoppingList',function(req,res){
   res.render('newShoppingList')
 })
 
-app.get('/newGroceryItem',function(req,res){
-
-  res.render('newGroceryItem')
-})
 
 app.post('/shoppingList', function(req,res){
 
@@ -56,10 +52,11 @@ app.post('/deleteShoppingList',function(req,res){
   })
 })
 
-app.get('/groceryList',function(req,res){
+app.get('/groceryList/:shoppinglistid',function(req,res){
 
-  db.any('SELECT sl.shoppinglistid, sl.shoppinglistname, gi.groceryitemname,gi.quantity,gi.price,gi.groceryitemid FROM shoppinglist sl left JOIN groceryitem gi ON sl.shoppinglistid = gi.shoppinglistid').then(function(data){
-    console.log(data)
+  let shoppinglistid = req.params.shoppinglistid
+
+  db.any('SELECT sl.shoppinglistid, sl.shoppinglistname, gi.groceryitemname,gi.quantity,gi.price,gi.groceryitemid FROM shoppinglist sl left JOIN groceryitem gi ON sl.shoppinglistid = gi.shoppinglistid WHERE sl.shoppinglistid = $1',[shoppinglistid]).then(function(data){
     res.render('groceryList',{'groceryitem' : data,'shoppinglistname' : data[0].shoppinglistname, 'shoppinglistid' : data[0].shoppinglistid})
   })
 })
@@ -73,7 +70,7 @@ app.post('/groceryList', function(req,res){
 
 
   db.none('INSERT INTO groceryitem(groceryitemname, quantity, price,shoppinglistid) VALUES($1,$2,$3,$4)',[item,quantity,price,id]).then(function(){
-    res.redirect('/groceryList')
+    res.redirect('/groceryList/'+id+'')
   })
 })
 
@@ -85,6 +82,7 @@ app.post('/deleteGroceryItem',function(req,res){
     res.redirect('/groceryList')
   })
 })
+
 
 
 

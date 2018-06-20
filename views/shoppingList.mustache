@@ -19,14 +19,14 @@
           <li>
             <div id='listName'>{{shoppinglistname}}</div>
             <div id='listDeleteForm'>
-              <form action='/deleteShoppingList' method="POST">
-                <input type="hidden" name="shoppingListId" value='{{shoppinglistid}}'/>
-                <input type='submit' value="Delete"/>
-              </form>
+            <a href='/groceryList/{{shoppinglistid}}'>View Items</a>
 
-              <form action='/groceryList'>
-                <input type="hidden" name="showGroceryList" value='{{shoppinglistid}}'/>
-                <input type='submit' value="Show Grocery Items">
+            <form action='/deleteShoppingList' method="POST">
+              <input type="hidden" name="shoppingListId" value='{{shoppinglistid}}'/>
+              <input type='submit' value="Delete"/>
+            </form>
+
+
             </div>
           </li>
 
